@@ -39,7 +39,7 @@ parens :: Parser a -> Parser a
 parens = between (string "(") (string ")")
 
 parseVar :: Parser Proposition
-parseVar = lexemeP ((Boolean <$> (char 'T' <|> char 'F')) <?> "var")
+parseVar = lexemeP ((Boolean <$> (char 'T' <|> char 'F' <|> char '1' <|> char '0')) <?> "var")
 
 expression :: Parser Proposition 
 expression = lexemeP (makeExprParser parseTerm table <?> "expression")

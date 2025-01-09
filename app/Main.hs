@@ -42,7 +42,9 @@ calculator = do
     input         <- getUserInput 
     eitherCalcIn  <- parseUserInput input 
     case eitherCalcIn of 
-        Left parseerror -> calculator
+        Left parseerror -> do 
+            -- liftIO $ putStrLn $ errorBundlePretty parseerror
+            calculator
         Right r         -> 
             case r of 
                 Left _ -> return DoExit
@@ -78,4 +80,4 @@ runCalculator calc =
 main :: IO ()
 main = do 
     exit <- runCalculator calculator
-    if exit == DoExit then exitSuccess else main 
+    if exit == DoExit then (putStrLn "exiting...") >> exitSuccess else main 
