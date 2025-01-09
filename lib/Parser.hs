@@ -32,7 +32,8 @@ lexemeP :: Parser a -> Parser a
 lexemeP  = L.lexeme spaceP
 
 parseProposition :: Parser Proposition 
-parseProposition = expression
+parseProposition = 
+    head <$> (manyTill expression eof)
 
 parens :: Parser a -> Parser a
 parens = between (string "(") (string ")")
